@@ -1,0 +1,65 @@
+{
+  "root": true,
+  "ignorePatterns": ["dist/*", "node_modules/*", "public/*", "*.config.js"],
+  "overrides": [
+    {
+      "files": ["*.{ts,js}"],
+      "plugins": [
+        "@typescript-eslint",
+        "prettier",
+        "unused-imports",
+        "simple-import-sort",
+        "tailwindcss"
+      ],
+      "extends": [
+        "eslint:recommended",
+        "plugin:tailwindcss/recommended",
+        "plugin:prettier/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        // This is required if you use inline templates in Components
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
+      "rules": {
+        /**
+         * Any TypeScript source code (NOT TEMPLATE) related rules you wish to use/reconfigure over and above the
+         * recommended set provided by the @angular-eslint project would go here.
+         */
+        "@angular-eslint/directive-selector": [
+          "error",
+          { "type": "attribute", "prefix": "app", "style": "camelCase" }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          { "type": "element", "prefix": "app", "style": "kebab-case" }
+        ],
+        "prettier/prettier": ["error"],
+        "import/extensions": "off", // Avoid missing file extension errors, TypeScript already provides a similar feature
+        "@typescript-eslint/comma-dangle": "off", // Avoid conflict rule between Eslint and Prettier
+        "@typescript-eslint/consistent-type-imports": "error", // Ensure `import type` is used when it's necessary
+        "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"], // Overrides Airbnb configuration and enable no-restricted-syntax
+        "import/prefer-default-export": "off", // Named export is easier to refactor automatically
+        "import/no-named-as-default": "off",
+        "simple-import-sort/imports": "error", // Import configuration for `eslint-plugin-simple-import-sort`
+        "simple-import-sort/exports": "error", // Export configuration for `eslint-plugin-simple-import-sort`
+        "import/order": "off", // Avoid conflict rule between `eslint-plugin-import` and `eslint-plugin-simple-import-sort`
+        "@typescript-eslint/no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "plugins": ["tailwindcss"],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility",
+        "plugin:tailwindcss/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}
