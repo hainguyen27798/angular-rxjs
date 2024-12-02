@@ -1,0 +1,10 @@
+<div class="container mx-auto flex w-screen justify-center p-6">
+  <div class="rounded-lg border p-6 shadow">
+    <div class="flex flex-wrap gap-6">
+      @for (dish of dishes(); track dish.name) {
+        <app-scan [dish]="dish" />
+      }
+    </div>
+  </div>
+  {{ this.userWithPermissions$ | async }}
+</div>
